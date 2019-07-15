@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const main = document.querySelector('.main');
 
-  const maxDiceQuantity = 9;
+  const maxDiceQuantity = 25;
   const faces = 6;
   const diceQuantityOptions = [];
   optionSquare = 0;
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log(rn);
       const roll = document.createElement('div');
       roll.className = 'roll';
-      roll.textContent = rn;
+      // roll.textContent = rn;
       roll.style.height = `${94/(selectedSquare**0.5)}%`;
       roll.style.width = `${94/(selectedSquare**0.5)}%`;
       roll.style.minWidth = `${94/(selectedSquare**0.5)}%`;
@@ -101,7 +101,50 @@ document.addEventListener('DOMContentLoaded', () => {
       roll.style.fontSize = `${45/(selectedSquare**0.5)}vh`;
       roll.style.lineHeight = `${88/(selectedSquare**0.5)}vh`;
       rollSpace.appendChild(roll);
+      showDots(roll, rn);
     }
   }
+
+  function showDots(die, n) {
+    for (k=0; k<9; k++) {
+      const dot = document.createElement('div');
+      dot.className = 'dot';
+      dot.id = `dot${k}`;
+      die.appendChild(dot);
+      if (n==1) {
+        if (k==4) {
+          dot.style.backgroundColor = 'white';
+        }
+      } else if (n==2) {
+        if (k==2 || k==6) {
+          dot.style.backgroundColor = 'white';
+        }
+      } else if (n==3) {
+        if (k==2 || k==4 || k==6) {
+          dot.style.backgroundColor = 'white';
+        }
+      } else if (n==4) {
+        if (k==0 || k==2 || k==6 || k==8) {
+          dot.style.backgroundColor = 'white';
+        }
+      } else if (n==5) {
+        if (k==0 || k==2 || k==4 || k==6 || k==8) {
+          dot.style.backgroundColor = 'white';
+        }
+      } else if (n==6) {
+        if (k==0 || k==2 || k==3 || k==5 || k==6 || k==8) {
+          dot.style.backgroundColor = 'white';
+        }
+      }
+
+      // colourDots(die, n);
+    }
+  }
+
+  // function colourDots(n) {
+  //   if (n==1) {
+  //     document.querySelector(`#dot${4}`).style.backgroundColor = 'black';
+  //   }
+  // }
 
 })

@@ -46,8 +46,22 @@ body {
 }
 
 .roll {
-  background-color: green;
+  background-color: red;
   border-radius: 5%;
   text-align: center;
   margin: 1vh;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.dot {
+  height: 25%;
+  width: 25%;
+  margin: 4%;
+  /* min-width: 33.3%; */
+  background-color: red;
+  border-radius: 50%;
 }
