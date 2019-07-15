@@ -1,10 +1,26 @@
 body {
   font-family: sans-serif;
   background-color: blue;
+  color: white;
   height: 98vh;
   width: 99vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.main {
+  height: 98vh;
+  width: 98vh;
+  background-color: red;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.question {
+  text-align: center;
+  font-size: 5vh;
 }
