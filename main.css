@@ -39,6 +39,8 @@ body {
 }
 
 .quantity {
-  /* background-color: green; */
+  background-color: royalblue;
+  border-radius: 5%;
   text-align: center;
+  margin: 1vh;
 }
