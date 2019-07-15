@@ -3,13 +3,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const main = document.querySelector('.main');
 
   const maxDiceQuantity = 9;
+  const faces = 6;
   const diceQuantityOptions = [];
-  nextSquare = 0;
+  optionSquare = 0;
+
+  selectedQuantity = 0;
+  selectedSquare = 0;
 
   // const diceQuantityOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   addDiceQuantityOptionsToArray();
-  determineNextSquare();
+  optionSquare = determineNextSquare(maxDiceQuantity);
   showDiceQuantityOptions();
 
   function addDiceQuantityOptionsToArray() {
@@ -18,15 +22,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  function determineNextSquare() {
-    j=maxDiceQuantity;
-    while (nextSquare == 0) {
-      // console.log(j);
-      // console.log(Math.sqrt(j));
+  function determineNextSquare(n) {
+    j = n;
+    if (Number.isInteger(Math.sqrt(j))) {
+      return j;
+    }
+    while (!Number.isInteger(Math.sqrt(j))) {
+      j++;
       if (Number.isInteger(Math.sqrt(j))) {
-        nextSquare = j;
-      } else {
-        j++;
+        return j;
       }
     }
   }
@@ -47,7 +51,14 @@ document.addEventListener('DOMContentLoaded', () => {
   function addNumbersSpace() {
     const numbersSpace = document.createElement('div');
     numbersSpace.className = 'numbersSpace';
+    // console.log(main);
     main.appendChild(numbersSpace);
+  }
+
+  function addRollSpace() {
+    const rollSpace = document.createElement('div');
+    rollSpace.className = 'rollSpace';
+    main.appendChild(rollSpace);
   }
 
   function showDiceQuantityNumbers() {
@@ -56,24 +67,40 @@ document.addEventListener('DOMContentLoaded', () => {
       const quantity = document.createElement('div');
       quantity.className = 'quantity';
       quantity.textContent = diceQuantityOptions[i];
-      quantity.style.height = `${94/(nextSquare**0.5)}%`;
-      quantity.style.width = `${94/(nextSquare**0.5)}%`;
-      quantity.style.minWidth = `${94/(nextSquare**0.5)}%`;
-      quantity.style.margin = `${3/(nextSquare**0.5)}%`;
-      quantity.style.fontSize = `${45/(diceQuantityOptions.length**0.5)}vh`;
-      quantity.style.lineHeight = `${88/(nextSquare**0.5)}vh`;
+      quantity.style.height = `${94/(optionSquare**0.5)}%`;
+      quantity.style.width = `${94/(optionSquare**0.5)}%`;
+      quantity.style.minWidth = `${94/(optionSquare**0.5)}%`;
+      quantity.style.margin = `${3/(optionSquare**0.5)}%`;
+      quantity.style.fontSize = `${45/(optionSquare**0.5)}vh`;
+      quantity.style.lineHeight = `${88/(optionSquare**0.5)}vh`;
       numbersSpace.appendChild(quantity);
       quantity.addEventListener('click', () => {
         // console.log(parseInt(quantity.textContent));
-        rollDice(parseInt(quantity.textContent))
+        selectedQuantity = parseInt(quantity.textContent);
+        rollDice();
       })
     };
   }
 
-  function rollDice(n) {
+  function rollDice() {
     main.innerHTML = '';
-    for (i=0; i<n; i++) {
-      console.log('roll', i+1);
+    addRollSpace();
+    const rollSpace = document.querySelector('.rollSpace');
+    console.log(rollSpace);
+    selectedSquare = determineNextSquare(selectedQuantity);
+    for (i=0; i<selectedQuantity; i++) {
+      const rn = Math.floor(Math.random() * faces) + 1;
+      console.log(rn);
+      const roll = document.createElement('div');
+      roll.className = 'roll';
+      roll.textContent = rn;
+      roll.style.height = `${94/(selectedSquare**0.5)}%`;
+      roll.style.width = `${94/(selectedSquare**0.5)}%`;
+      roll.style.minWidth = `${94/(selectedSquare**0.5)}%`;
+      roll.style.margin = `${3/(selectedSquare**0.5)}%`;
+      roll.style.fontSize = `${45/(selectedSquare**0.5)}vh`;
+      roll.style.lineHeight = `${88/(selectedSquare**0.5)}vh`;
+      rollSpace.appendChild(roll);
     }
   }
 

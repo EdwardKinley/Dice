@@ -27,7 +27,7 @@ body {
   /* background-color: pink; */
 }
 
-.numbersSpace {
+.numbersSpace, .rollSpace {
   height: 90%;
   width: 90%;
   /* background-color: yellow; */
@@ -40,6 +40,13 @@ body {
 
 .quantity {
   background-color: royalblue;
+  border-radius: 5%;
+  text-align: center;
+  margin: 1vh;
+}
+
+.roll {
+  background-color: green;
   border-radius: 5%;
   text-align: center;
   margin: 1vh;
