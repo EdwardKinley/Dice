@@ -13,7 +13,7 @@ body {
 .main {
   height: 98vh;
   width: 98vh;
-  background-color: red;
+  /* background-color: red; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -23,4 +23,22 @@ body {
 .question {
   text-align: center;
   font-size: 5vh;
+  height: 10%;
+  /* background-color: pink; */
+}
+
+.numbersSpace {
+  height: 90%;
+  width: 90%;
+  /* background-color: yellow; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.quantity {
+  /* background-color: green; */
+  text-align: center;
 }
