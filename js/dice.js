@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const main = document.querySelector('.main');
 
-  const maxDiceQuantity = 25;
+  const maxDiceQuantity = 36;
   const faces = 6;
   const diceQuantityOptions = [];
   optionSquare = 0;
@@ -94,10 +94,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const roll = document.createElement('div');
       roll.className = 'roll';
       // roll.textContent = rn;
-      roll.style.height = `${94/(selectedSquare**0.5)}%`;
-      roll.style.width = `${94/(selectedSquare**0.5)}%`;
-      roll.style.minWidth = `${94/(selectedSquare**0.5)}%`;
-      roll.style.margin = `${3/(selectedSquare**0.5)}%`;
+      roll.style.height = `${80/(selectedSquare**0.5)}%`;
+      roll.style.width = `${80/(selectedSquare**0.5)}%`;
+      roll.style.minWidth = `${80/(selectedSquare**0.5)}%`;
+      roll.style.margin = `${10/(selectedSquare**0.5)}%`;
       roll.style.fontSize = `${45/(selectedSquare**0.5)}vh`;
       roll.style.lineHeight = `${88/(selectedSquare**0.5)}vh`;
       rollSpace.appendChild(roll);
@@ -106,10 +106,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function showDots(die, n) {
+    const colours = ['red', 'blue', 'yellow', 'green', 'deeppink', 'rebeccapurple', 'black', 'darkorange', 'saddlebrown'];
+    const rn = Math.floor(Math.random() * colours.length);
+    const colour = colours[rn];
+    die.style.backgroundColor = colour;
     for (k=0; k<9; k++) {
       const dot = document.createElement('div');
       dot.className = 'dot';
       dot.id = `dot${k}`;
+      dot.style.backgroundColor = colour;
       die.appendChild(dot);
       if (n==1) {
         if (k==4) {
