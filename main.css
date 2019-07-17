@@ -55,6 +55,8 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  /* transition: rotate 0s ease; */
+  /* border-top: 10px solid black; */
 }
 
 .dot {

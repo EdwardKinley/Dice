@@ -99,10 +99,10 @@ document.addEventListener('DOMContentLoaded', () => {
     for (i=0; i<selectedQuantity; i++) {
       const roll = document.createElement('div');
       roll.className = 'roll';
-      roll.style.height = `${80/(selectedSquare**0.5)}%`;
-      roll.style.width = `${80/(selectedSquare**0.5)}%`;
-      roll.style.minWidth = `${80/(selectedSquare**0.5)}%`;
-      roll.style.margin = `${10/(selectedSquare**0.5)}%`;
+      roll.style.height = `${70/(selectedSquare**0.5)}%`;
+      roll.style.width = `${70/(selectedSquare**0.5)}%`;
+      roll.style.minWidth = `${70/(selectedSquare**0.5)}%`;
+      roll.style.margin = `${15/(selectedSquare**0.5)}%`;
       roll.style.fontSize = `${45/(selectedSquare**0.5)}vh`;
       roll.style.lineHeight = `${88/(selectedSquare**0.5)}vh`;
       rollSpace.appendChild(roll);
@@ -110,10 +110,14 @@ document.addEventListener('DOMContentLoaded', () => {
       addColour(roll, i);
     }
     showDots();
-    rollAllDice();
+    // rollAllDice();
     let rolling = setInterval(() => showDots(), 300);
     showDots(rolling);
     setTimeout(() => clearInterval(rolling), 1200);
+    let rotating = setInterval(() => rotateDice(), 300);
+    rotateDice(rotating);
+    setTimeout(() => clearInterval(rotating), 1200);
+    // rotateDice();
   }
 
   function addColour(die, i) {
@@ -164,12 +168,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  function rollAllDice() {
-    console.log('dice', dice);
+  function rotateDice() {
     for (i=0; i<dice.length; i++) {
-      console.log(dice[i].style.backgroundColor);
+      const rd = Math.random() * 360;
+      // const rd = 30;
+      console.log(rd);
+      dice[i].style.transform = `rotate(${rd}deg)`;
     }
   }
+
+  // function rollAllDice() {
+  //   console.log('dice', dice);
+  //   for (i=0; i<dice.length; i++) {
+  //     console.log(dice[i].style.backgroundColor);
+  //   }
+  // }
 
 
 
