@@ -2,15 +2,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const main = document.querySelector('.main');
 
-  const maxDiceQuantity = 36;
+  const maxDiceQuantity = 9;
   const faces = 6;
   const diceQuantityOptions = [];
   optionSquare = 0;
 
   selectedQuantity = 0;
   selectedSquare = 0;
-
-  // const diceQuantityOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   addDiceQuantityOptionsToArray();
   optionSquare = determineNextSquare(maxDiceQuantity);
@@ -75,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
       quantity.style.lineHeight = `${88/(optionSquare**0.5)}vh`;
       numbersSpace.appendChild(quantity);
       quantity.addEventListener('click', () => {
-        // console.log(parseInt(quantity.textContent));
         selectedQuantity = parseInt(quantity.textContent);
         rollDice();
       })
@@ -86,14 +83,11 @@ document.addEventListener('DOMContentLoaded', () => {
     main.innerHTML = '';
     addRollSpace();
     const rollSpace = document.querySelector('.rollSpace');
-    console.log(rollSpace);
+    // console.log(rollSpace);
     selectedSquare = determineNextSquare(selectedQuantity);
     for (i=0; i<selectedQuantity; i++) {
-      const rn = Math.floor(Math.random() * faces) + 1;
-      console.log(rn);
       const roll = document.createElement('div');
       roll.className = 'roll';
-      // roll.textContent = rn;
       roll.style.height = `${80/(selectedSquare**0.5)}%`;
       roll.style.width = `${80/(selectedSquare**0.5)}%`;
       roll.style.minWidth = `${80/(selectedSquare**0.5)}%`;
@@ -101,15 +95,21 @@ document.addEventListener('DOMContentLoaded', () => {
       roll.style.fontSize = `${45/(selectedSquare**0.5)}vh`;
       roll.style.lineHeight = `${88/(selectedSquare**0.5)}vh`;
       rollSpace.appendChild(roll);
-      showDots(roll, rn);
+      addColour(roll, i);
     }
   }
 
-  function showDots(die, n) {
+  function addColour(die, i) {
     const colours = ['red', 'blue', 'yellow', 'green', 'deeppink', 'rebeccapurple', 'black', 'darkorange', 'saddlebrown'];
-    const rn = Math.floor(Math.random() * colours.length);
-    const colour = colours[rn];
+    // const rnc = Math.floor(Math.random() * colours.length);
+    // const colour = colours[rnc];
+    const colour = colours[i];
     die.style.backgroundColor = colour;
+    showDots(die, colour);
+  }
+
+  function showDots(die, colour) {
+    const n = Math.floor(Math.random() * faces) + 1;
     for (k=0; k<9; k++) {
       const dot = document.createElement('div');
       dot.className = 'dot';
@@ -141,15 +141,9 @@ document.addEventListener('DOMContentLoaded', () => {
           dot.style.backgroundColor = 'white';
         }
       }
-
-      // colourDots(die, n);
     }
   }
 
-  // function colourDots(n) {
-  //   if (n==1) {
-  //     document.querySelector(`#dot${4}`).style.backgroundColor = 'black';
-  //   }
-  // }
+
 
 })

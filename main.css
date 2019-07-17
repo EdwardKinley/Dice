@@ -40,14 +40,14 @@ body {
 
 .quantity {
   background-color: royalblue;
-  border-radius: 5%;
+  border-radius: 10%;
   text-align: center;
   margin: 1vh;
 }
 
 .roll {
   /* background-color: red; */
-  border-radius: 5%;
+  border-radius: 10%;
   text-align: center;
   /* margin: 1vh; */
   display: flex;
