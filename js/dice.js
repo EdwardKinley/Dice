@@ -99,10 +99,10 @@ document.addEventListener('DOMContentLoaded', () => {
     for (i=0; i<selectedQuantity; i++) {
       const roll = document.createElement('div');
       roll.className = 'roll';
-      roll.style.height = `${70/(selectedSquare**0.5)}%`;
-      roll.style.width = `${70/(selectedSquare**0.5)}%`;
-      roll.style.minWidth = `${70/(selectedSquare**0.5)}%`;
-      roll.style.margin = `${15/(selectedSquare**0.5)}%`;
+      roll.style.height = `${60/(selectedSquare**0.5)}%`;
+      roll.style.width = `${60/(selectedSquare**0.5)}%`;
+      roll.style.minWidth = `${60/(selectedSquare**0.5)}%`;
+      roll.style.margin = `${20/(selectedSquare**0.5)}%`;
       roll.style.fontSize = `${45/(selectedSquare**0.5)}vh`;
       roll.style.lineHeight = `${88/(selectedSquare**0.5)}vh`;
       rollSpace.appendChild(roll);
@@ -114,9 +114,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let rolling = setInterval(() => showDots(), 300);
     showDots(rolling);
     setTimeout(() => clearInterval(rolling), 1200);
-    let rotating = setInterval(() => rotateDice(), 300);
-    rotateDice(rotating);
-    setTimeout(() => clearInterval(rotating), 1200);
+    // let rotating = setInterval(() => rotateDice(), 300);
+    // rotateDice(rotating);
+    // setTimeout(() => clearInterval(rotating), 1200);
+    let moving = setInterval(() => moveDice(), 300);
+    moveDice(moving);
+    setTimeout(() => clearInterval(moving), 1200);
     // rotateDice();
   }
 
@@ -168,14 +171,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  function rotateDice() {
+  function moveDice() {
     for (i=0; i<dice.length; i++) {
       const rd = Math.random() * 360;
-      // const rd = 30;
-      console.log(rd);
-      dice[i].style.transform = `rotate(${rd}deg)`;
+      const tx = Math.random() * 15;
+      const ty = Math.random() * 15;
+      dice[i].style.transform = `rotate(${rd}deg) translate(${tx}px, ${ty}px)`;
     }
   }
+
+  // function moveDice() {
+  //   for (i=0; i<dice.length; i++) {
+  //     const tx = Math.random() * 20;
+  //     const ty = Math.random() * 20;
+  //     dice[i].style.transform = `translate(${tx}px, ${ty}px)`;
+  //   }
+  // }
 
   // function rollAllDice() {
   //   console.log('dice', dice);
