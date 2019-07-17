@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const main = document.querySelector('.main');
 
+  const colours = ['red', 'blue', 'yellow', 'green', 'deeppink', 'rebeccapurple', 'black', 'darkorange', 'saddlebrown'];
   const maxDiceQuantity = 9;
   const faces = 6;
   const diceQuantityOptions = [];
@@ -55,6 +56,13 @@ document.addEventListener('DOMContentLoaded', () => {
     main.appendChild(numbersSpace);
   }
 
+  function addButtonsSpace() {
+    main.style.flexDirection = 'row';
+    const buttonsSpace = document.createElement('div');
+    buttonsSpace.className = 'buttonsSpace';
+    main.appendChild(buttonsSpace);
+  }
+
   function addRollSpace() {
     const rollSpace = document.createElement('div');
     rollSpace.className = 'rollSpace';
@@ -73,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
       quantity.style.margin = `${3/(optionSquare**0.5)}%`;
       quantity.style.fontSize = `${45/(optionSquare**0.5)}vh`;
       quantity.style.lineHeight = `${88/(optionSquare**0.5)}vh`;
+      quantity.style.backgroundColor = colours[i];
       numbersSpace.appendChild(quantity);
     };
   }
@@ -93,6 +102,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function rollDice() {
     main.innerHTML = '';
+    addButtonsSpace();
+    setTimeout(() => addButtons(), 1500);
     addRollSpace();
     const rollSpace = document.querySelector('.rollSpace');
     selectedSquare = determineNextSquare(selectedQuantity);
@@ -124,7 +135,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function addColour(die, i) {
-    const colours = ['red', 'blue', 'yellow', 'green', 'deeppink', 'rebeccapurple', 'black', 'darkorange', 'saddlebrown'];
     const colour = colours[i];
     die.style.backgroundColor = colour;
     // showDots(die, colour);
@@ -179,6 +189,32 @@ document.addEventListener('DOMContentLoaded', () => {
       dice[i].style.transform = `rotate(${rd}deg) translate(${tx}px, ${ty}px)`;
     }
   }
+
+  function addButtons() {
+    const buttonsSpace = document.querySelector('.buttonsSpace');
+    const againButton = document.createElement('button');
+    againButton.id = 'againButton';
+    againButton.textContent = 'Again';
+    buttonsSpace.appendChild(againButton);
+    againButton.addEventListener('click', () => {
+      rollDice();
+    })
+    const newButton = document.createElement('button');
+    newButton.textContent = 'New';
+    buttonsSpace.appendChild(newButton);
+    newButton.addEventListener('click', () => {
+      location.reload();
+    })
+  }
+
+  document.addEventListener('keyup', function(e) {
+    if (e.keyCode === 13) {
+      if (document.querySelector('#againButton') != null) {
+        rollDice();
+      }
+    }
+  })
+
 
   // function moveDice() {
   //   for (i=0; i<dice.length; i++) {
