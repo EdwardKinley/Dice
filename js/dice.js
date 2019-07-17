@@ -10,9 +10,12 @@ document.addEventListener('DOMContentLoaded', () => {
   selectedQuantity = 0;
   selectedSquare = 0;
 
+  dice = [];
+
   addDiceQuantityOptionsToArray();
   optionSquare = determineNextSquare(maxDiceQuantity);
   showDiceQuantityOptions();
+  enableDiceRolls();
 
   function addDiceQuantityOptionsToArray() {
     for (i=0; i<maxDiceQuantity; i++) {
@@ -49,7 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
   function addNumbersSpace() {
     const numbersSpace = document.createElement('div');
     numbersSpace.className = 'numbersSpace';
-    // console.log(main);
     main.appendChild(numbersSpace);
   }
 
@@ -72,18 +74,27 @@ document.addEventListener('DOMContentLoaded', () => {
       quantity.style.fontSize = `${45/(optionSquare**0.5)}vh`;
       quantity.style.lineHeight = `${88/(optionSquare**0.5)}vh`;
       numbersSpace.appendChild(quantity);
-      quantity.addEventListener('click', () => {
-        selectedQuantity = parseInt(quantity.textContent);
+    };
+  }
+
+  function enableDiceRolls() {
+    const quantities = document.querySelectorAll('.quantity');
+    // console.log(quantities);
+    for (j=0; j<quantities.length; j++) {
+      const thisJ = j;
+      quantities[thisJ].addEventListener('click', () => {
+        // console.log(thisJ);
+        // console.log(quantities[thisJ]);
+        selectedQuantity = parseInt(quantities[thisJ].textContent);
         rollDice();
       })
-    };
+    }
   }
 
   function rollDice() {
     main.innerHTML = '';
     addRollSpace();
     const rollSpace = document.querySelector('.rollSpace');
-    // console.log(rollSpace);
     selectedSquare = determineNextSquare(selectedQuantity);
     for (i=0; i<selectedQuantity; i++) {
       const roll = document.createElement('div');
@@ -95,52 +106,68 @@ document.addEventListener('DOMContentLoaded', () => {
       roll.style.fontSize = `${45/(selectedSquare**0.5)}vh`;
       roll.style.lineHeight = `${88/(selectedSquare**0.5)}vh`;
       rollSpace.appendChild(roll);
+      dice.push(roll);
       addColour(roll, i);
     }
+    showDots();
+    rollAllDice();
+    let rolling = setInterval(() => showDots(), 300);
+    showDots(rolling);
+    setTimeout(() => clearInterval(rolling), 1200);
   }
 
   function addColour(die, i) {
     const colours = ['red', 'blue', 'yellow', 'green', 'deeppink', 'rebeccapurple', 'black', 'darkorange', 'saddlebrown'];
-    // const rnc = Math.floor(Math.random() * colours.length);
-    // const colour = colours[rnc];
     const colour = colours[i];
     die.style.backgroundColor = colour;
-    showDots(die, colour);
+    // showDots(die, colour);
   }
 
-  function showDots(die, colour) {
-    const n = Math.floor(Math.random() * faces) + 1;
-    for (k=0; k<9; k++) {
-      const dot = document.createElement('div');
-      dot.className = 'dot';
-      dot.id = `dot${k}`;
-      dot.style.backgroundColor = colour;
-      die.appendChild(dot);
-      if (n==1) {
-        if (k==4) {
-          dot.style.backgroundColor = 'white';
-        }
-      } else if (n==2) {
-        if (k==2 || k==6) {
-          dot.style.backgroundColor = 'white';
-        }
-      } else if (n==3) {
-        if (k==2 || k==4 || k==6) {
-          dot.style.backgroundColor = 'white';
-        }
-      } else if (n==4) {
-        if (k==0 || k==2 || k==6 || k==8) {
-          dot.style.backgroundColor = 'white';
-        }
-      } else if (n==5) {
-        if (k==0 || k==2 || k==4 || k==6 || k==8) {
-          dot.style.backgroundColor = 'white';
-        }
-      } else if (n==6) {
-        if (k==0 || k==2 || k==3 || k==5 || k==6 || k==8) {
-          dot.style.backgroundColor = 'white';
+  function showDots() {
+    for (i=0; i<dice.length; i++) {
+      const die = dice[i];
+      die.innerHTML = '';
+      const colour = die.style.backgroundColor;
+      const n = Math.floor(Math.random() * faces) + 1;
+      for (k=0; k<9; k++) {
+        const dot = document.createElement('div');
+        dot.className = 'dot';
+        dot.id = `dot${k}`;
+        dot.style.backgroundColor = colour;
+        die.appendChild(dot);
+        if (n==1) {
+          if (k==4) {
+            dot.style.backgroundColor = 'white';
+          }
+        } else if (n==2) {
+          if (k==2 || k==6) {
+            dot.style.backgroundColor = 'white';
+          }
+        } else if (n==3) {
+          if (k==2 || k==4 || k==6) {
+            dot.style.backgroundColor = 'white';
+          }
+        } else if (n==4) {
+          if (k==0 || k==2 || k==6 || k==8) {
+            dot.style.backgroundColor = 'white';
+          }
+        } else if (n==5) {
+          if (k==0 || k==2 || k==4 || k==6 || k==8) {
+            dot.style.backgroundColor = 'white';
+          }
+        } else if (n==6) {
+          if (k==0 || k==2 || k==3 || k==5 || k==6 || k==8) {
+            dot.style.backgroundColor = 'white';
+          }
         }
       }
+    }
+  }
+
+  function rollAllDice() {
+    console.log('dice', dice);
+    for (i=0; i<dice.length; i++) {
+      console.log(dice[i].style.backgroundColor);
     }
   }
 
